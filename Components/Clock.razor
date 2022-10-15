@@ -1,0 +1,119 @@
+<style>
+    .clock {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border-radius: 150px;
+        border: 5px solid white;
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .centre {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: #999;
+        width: 8px;
+        height: 8px;
+        border-radius: 8px;
+    }
+
+    .hourHand,
+    .minuteHand,
+    .secondHand {
+        transform-origin: left;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        rotate: -90deg;
+        transform: translateX(-50%) translateY(-50%);
+        width: 50px;
+        height: 4px;
+        border-radius: 4px;
+    }
+
+    .minuteHand {
+        width: 60px;
+        height: 2px;
+    }
+
+    .secondHand {
+        width: 70px;
+        height: 1px;
+    }
+
+    .light.clock {
+        background-color: #ccc;
+    }
+
+    .light.hourHand,
+    .light.minuteHand,
+    .light.secondHand {
+        background-color: #333;
+    }
+
+    .dark.clock {
+        background-color: #333;
+    }
+
+    .dark.hourHand,
+    .dark.minuteHand,
+    .dark.secondHand {
+        background-color: #ccc;
+    }
+
+    .currentDateTime {
+        font-family: monospace;
+        font-size: 10px;
+        font-weight: bold;
+        margin-top: 2em;
+        text-align: center;
+        width: 65px;
+    }
+</style>
+
+<div style="display: flex; flex-direction: column; align-items: center">
+    <div class="@ampm clock">
+        <div class="centre"></div>
+        <div class="@ampm hourHand" style="transform: rotate(@(hour)deg);"></div>
+        <div class="@ampm minuteHand" style="transform: rotate(@(minute)deg);"></div>
+        <div class="@ampm secondHand" style="transform: rotate(@(second)deg);"></div>
+    </div>
+    <p class="currentDateTime">
+        @CityName
+    </p>
+</div>
+
+@code
+{
+    Timer? timer;
+    string? ampm;
+    double hour, minute, second;
+
+    [Parameter] public int TimeZoneInMinutes { get; set; }
+    [Parameter] public bool IsMechanical { get; set; }
+    [Parameter] public string CityName { get; set; } = "London";
+
+    void UpdateTime(object? stateInfo)
+    {
+        var time = DateTime.UtcNow.AddMinutes(TimeZoneInMinutes);
+        hour = 360 * time.Hour / 12 + 30 * time.Minute / 60.0;
+        minute = 360 * time.Minute / 60 + 6.0 * time.Second / 60.0;
+        second = 360 * time.Second / 60 + 6.0 * time.Millisecond / 1000.0;
+
+        if (time.Hour >= 6 && time.Hour <= 17)
+            ampm = "light";
+        else
+            ampm = "dark";
+
+        StateHasChanged();
+    }
+
+    protected override void OnInitialized()
+    {
+        UpdateTime(null);
+        int duration = IsMechanical ? 10 : 1000;
+        timer = new Timer(UpdateTime, new AutoResetEvent(false), duration, duration);
+    }
+}
