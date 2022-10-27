@@ -1,28 +1,22 @@
 ﻿@page "/"
 <style>
-    * {
-        margin: 0;
-        padding: 0
-    }
-
-    .container {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        width: 100vw;
-        height: 100vh;
-        place-content: center;
-        place-items: center;
-        flex-wrap: wrap;
-        gap: 10em;
-    }
+.container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    place-content: center;
+    place-items: center;
+    flex-wrap: wrap;
+    gap: 10em;
+}
 </style>
-
 <div class="container">
     <Clock TimeZoneInMinutes="-420" CityName="Los Angeles" />    
     <Clock TimeZoneInMinutes="-240" CityName="New York" />
-    <Clock />
-    <Clock TimeZoneInMinutes="200" CityName="Dubai" />    
+    <Clock TimeZoneInMinutes="60" CityName="London" />
+    <Clock TimeZoneInMinutes="240" CityName="Dubai" />    
     <Clock TimeZoneInMinutes="330" CityName="New Delhi" IsMechanical=true />
     <Clock TimeZoneInMinutes="480" CityName="Beijing" />    
     <Clock TimeZoneInMinutes="540" CityName="Tokyo" />

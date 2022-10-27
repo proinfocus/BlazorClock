@@ -31,6 +31,7 @@
         width: 50px;
         height: 4px;
         border-radius: 4px;
+        transition: all 10ms ease;
     }
 
     .minuteHand {
@@ -81,7 +82,7 @@
         <div class="@ampm secondHand" style="transform: rotate(@(second)deg);"></div>
     </div>
     <p class="currentDateTime">
-        @CityName
+        @CityName<br/>(@currentTime)
     </p>
 </div>
 
@@ -90,23 +91,22 @@
     Timer? timer;
     string? ampm;
     double hour, minute, second;
+    string? currentTime;
 
     [Parameter] public int TimeZoneInMinutes { get; set; }
     [Parameter] public bool IsMechanical { get; set; }
-    [Parameter] public string CityName { get; set; } = "London";
+    [Parameter] public string CityName { get; set; } = string.Empty;
 
     void UpdateTime(object? stateInfo)
     {
         var time = DateTime.UtcNow.AddMinutes(TimeZoneInMinutes);
+        currentTime = time.ToString("h:mm tt");
+
         hour = 360 * time.Hour / 12 + 30 * time.Minute / 60.0;
         minute = 360 * time.Minute / 60 + 6.0 * time.Second / 60.0;
         second = 360 * time.Second / 60 + 6.0 * time.Millisecond / 1000.0;
 
-        if (time.Hour >= 6 && time.Hour <= 17)
-            ampm = "light";
-        else
-            ampm = "dark";
-
+        ampm = (time.Hour >= 6 && time.Hour <= 17) ? "light" : "dark";
         StateHasChanged();
     }
 
@@ -116,4 +116,5 @@
         int duration = IsMechanical ? 10 : 1000;
         timer = new Timer(UpdateTime, new AutoResetEvent(false), duration, duration);
     }
+    
 }
