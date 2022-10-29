@@ -25,5 +25,5 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish
-      run: dotnet publish -c Release -o ./docs
+      run: dotnet publish -c Release
       
