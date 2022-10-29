@@ -99,7 +99,7 @@
     void UpdateTime(object? stateInfo)
     {
         var time = DateTime.UtcNow.AddMinutes(TimeZoneInMinutes);
-        currentTime = time.ToString("hh:mm tt");
+        currentTime = time.ToString("h:mm tt");
         hour = 360 * time.Hour / 12 + 30 * time.Minute / 60.0;
         minute = 360 * time.Minute / 60 + 6.0 * time.Second / 60.0;
         second = 360 * time.Second / 60 + 6.0 * time.Millisecond / 1000.0;
