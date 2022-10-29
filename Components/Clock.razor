@@ -101,12 +101,7 @@
         hour = 360 * time.Hour / 12 + 30 * time.Minute / 60.0;
         minute = 360 * time.Minute / 60 + 6.0 * time.Second / 60.0;
         second = 360 * time.Second / 60 + 6.0 * time.Millisecond / 1000.0;
-
-        if (time.Hour >= 6 && time.Hour <= 17)
-            ampm = "light";
-        else
-            ampm = "dark";
-
+        ampm = (time.Hour >= 6 && time.Hour <= 17) ? "light" : "dark";
         StateHasChanged();
     }
 
