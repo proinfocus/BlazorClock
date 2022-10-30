@@ -1,16 +1,23 @@
 ﻿@page "/"
+
 <style>
 .container {
     margin: 0;
-    padding: 0;
+    padding: 2em;
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: calc(100vw - 4em);
+    overflow: hidden;
+    min-height: calc(100vh - 4em);
     place-content: center;
     place-items: center;
     flex-wrap: wrap;
-    gap: 10em;
+    gap: 3em;
 }
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
 </style>
 <div class="container">
     <Clock TimeZoneInMinutes="-420" CityName="Los Angeles" />    

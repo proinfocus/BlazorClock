@@ -1,6 +1,6 @@
 <style>
     .clock {
-        position: relative;
+        position: relative;        
         width: 150px;
         height: 150px;
         border-radius: 150px;
@@ -17,6 +17,7 @@
         width: 8px;
         height: 8px;
         border-radius: 8px;
+        border: 1px solid #000;
     }
 
     .hourHand,
@@ -34,14 +35,20 @@
         transition: all 10ms ease;
     }
 
+    .hourHand {
+        margin-top: -2px;
+    }
+
     .minuteHand {
         width: 60px;
+        margin-top: -1px;
         height: 2px;
     }
 
     .secondHand {
         width: 70px;
         height: 1px;
+        background-color: red !important;
     }
 
     .light.clock {
@@ -66,11 +73,10 @@
 
     .currentDateTime {
         font-family: monospace;
-        font-size: 10px;
-        font-weight: bold;
+        font-size: 14px;
         margin-top: 2em;
         text-align: center;
-        width: 65px;
+        width: 100%;
     }
 </style>
 
@@ -82,7 +88,7 @@
         <div class="@ampm secondHand" style="transform: rotate(@(second)deg);"></div>
     </div>
     <p class="currentDateTime">
-        @CityName<br/>(@currentTime)
+        <b>@CityName</b><br/>(@currentTime)
     </p>
 </div>
 
