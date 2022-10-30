@@ -3,7 +3,7 @@
         position: relative;        
         width: 150px;
         height: 150px;
-        border-radius: 150px;
+        border-radius: 100%;
         border: 5px solid white;
         box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
     }
@@ -46,6 +46,7 @@
     }
 
     .secondHand {
+        background-color: red !important;
         width: 70px;
         height: 1px;
         background-color: red !important;
@@ -80,7 +81,7 @@
     }
 </style>
 
-<div style="display: flex; flex-direction: column; align-items: center">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 0; margin: 0; padding: 0">
     <div class="@ampm clock">
         <div class="centre"></div>
         <div class="@ampm hourHand" style="transform: rotate(@(hour)deg);"></div>
@@ -88,7 +89,11 @@
         <div class="@ampm secondHand" style="transform: rotate(@(second)deg);"></div>
     </div>
     <p class="currentDateTime">
+<<<<<<< HEAD
         <b>@CityName</b><br/>(@currentTime)
+=======
+        @CityName<br/>(@currentTime)
+>>>>>>> e9bdf3b4aa48ed44b6e1551ddb11fc51adeadeb8
     </p>
 </div>
 
@@ -107,11 +112,17 @@
     {
         var time = DateTime.UtcNow.AddMinutes(TimeZoneInMinutes);
         currentTime = time.ToString("h:mm tt");
+<<<<<<< HEAD
 
         hour = 360 * time.Hour / 12 + 30 * time.Minute / 60.0;
         minute = 360 * time.Minute / 60 + 6.0 * time.Second / 60.0;
         second = 360 * time.Second / 60 + 6.0 * time.Millisecond / 1000.0;
 
+=======
+        hour = 360 * time.Hour / 12 + 30 * time.Minute / 60.0;
+        minute = 360 * time.Minute / 60 + 6.0 * time.Second / 60.0;
+        second = 360 * time.Second / 60 + 6.0 * time.Millisecond / 1000.0;
+>>>>>>> e9bdf3b4aa48ed44b6e1551ddb11fc51adeadeb8
         ampm = (time.Hour >= 6 && time.Hour <= 17) ? "light" : "dark";
         StateHasChanged();
     }
@@ -122,5 +133,9 @@
         int duration = IsMechanical ? 10 : 1000;
         timer = new Timer(UpdateTime, new AutoResetEvent(false), duration, duration);
     }
+<<<<<<< HEAD
     
 }
+=======
+}
+>>>>>>> e9bdf3b4aa48ed44b6e1551ddb11fc51adeadeb8
